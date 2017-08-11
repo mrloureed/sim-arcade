@@ -1,0 +1,28 @@
+.stage {
+    position: relative;
+    margin: 30px auto 0;
+    width: 1035px;
+    height: 805px;
+    background: url(../img/background.png);    
+}
+
+.box {
+    position: absolute;
+    width: 115px;
+    height: 115px;
+    background: #ccc;
+}
+
+.gamer {
+    position: absolute;
+    z-index: 100000;
+    -webkit-transition-duration: .35s;
+    -webkit-transition-timing-function: linear;    
+}
+
+.gamer div {
+    margin-top: -10px;
+    width: 115px;
+    height: 115px;
+    background: transparent url(../img/sprites-spearboy.png) no-repeat;
+}
