@@ -99,9 +99,6 @@ var videos = [{
     name:   'Frogger',
     idkey:  'l9fO-YuWPSk',
 }, {
-    name:   'Gauntlet',
-    idkey:  'fLnkCAFihqA',
-}, {
     name:   'Donkey Kong',
     idkey:  'Pp2aMs38ERY',
 }, {
@@ -114,9 +111,6 @@ var videos = [{
     name:   'Galaga',
     idkey:  'CbPJhLpunXw',
 }, {
-    name:   'Kung Fu Master',
-    idkey:  'EgO4HtWIJjQ',
-}, {
     name:   'Commando',
     idkey:  '1qctKI_t5eY',
 }, {
@@ -126,17 +120,8 @@ var videos = [{
     name:   'Tempest',
     idkey:  'G2Sv28sYUZc',
 }, {
-    name:   'Dragons Lair',
-    idkey:  'i6em4GRiRY0',
-}, {
     name:   'Qbert',
     idkey:  'karPYs22ACc',
-}, {
-    name:   'Tapper',
-    idkey:  'naremP5nL3w',
-}, {
-    name:   'Pacman',
-    idkey:  'v9ivu8LjQMg',
 }, {
     name:   'Zaxxon',
     idkey:  'ul2vX8-dmTA',
@@ -145,10 +130,7 @@ var videos = [{
     idkey:  'h34MviiKXXc',
 }, {
     name:   'Jungle Hunt',
-    idkey:  'DlKi0Is0nGQ',
-}, {
-    name:   'Karate Champ',
-    idkey:  '7A9jNDUMZEk'                                    
+    idkey:  'DlKi0Is0nGQ'                                  
 }];
 
 /* shuffle function */
