@@ -154,18 +154,33 @@ function shuffle(array) {
 }
 videos = shuffle(videos);
 
-/* calculate distance away */
+/* calculate farthest distance between games */
+var farthestDistance;
+function farthestDistance() {
+    var numberGames = trackIds.length;
+    var gamePositionFirst = $('#'+trackIds[0]).offset();
+    var gamePositionLast = $('#'+trackIds[numberGames-1]).offset();
+    var a =  gamePositionLast.left - gamePositionFirst.left;
+    var b =  gamePositionLast.top - gamePositionFirst.top;
+    farthestDistance = Math.sqrt( a*a + b*b ) / 115;
+    farthestDistance = farthestDistance.toFixed(2);
+}
+
+
+/* calculate game distances away from player */
 var distanceAway;
+var multiplier;
+var percentage;
 function calculateDistance(x,y) {
     var a = standingPosition[0] - x;
     var b = standingPosition[1] - y;
     distanceAway = Math.sqrt( a*a + b*b );
     distanceAway = distanceAway.toFixed(2);
-    console.log(standingPosition[0],standingPosition[1],distanceAway,x,y);
-
-    var multiplier = 14.14 * distanceAway;
+    //console.log(standingPosition[0],standingPosition[1],distanceAway,x,y);
+    percentage = 100 / distanceAway;
+    multiplier = farthestDistance * distanceAway;
     volume = 100 - multiplier;
-    console.log('volume',volume);
+    //console.log('volume',volume);
     return volume;
 }
 
@@ -176,12 +191,11 @@ function updateGameVol() {
         calculateDistance(x,y);
         player[i].setVolume(volume);
     }); 
-
-    //console.log('---');  
 }
 
 /* youtube render videos */
 function onYouTubeIframeAPIReady() {
+    console.log(trackIds[trackIds.length-1]);
     trackIds.forEach(function(event, i){
         player[i] = new YT.Player(event, {
             height: '115',
@@ -193,6 +207,8 @@ function onYouTubeIframeAPIReady() {
             }
         });
     });
+    farthestDistance();
+    updateGameVol();
 }    
 
 // The API will call this function when the video player is ready.

@@ -16,7 +16,7 @@
 .gamer {
     position: absolute;
     z-index: 100000;
-    -webkit-transition-duration: .35s;
+    -webkit-transition-duration: .40s;
     -webkit-transition-timing-function: linear;    
 }
 
