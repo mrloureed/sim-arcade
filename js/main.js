@@ -124,6 +124,26 @@ var videos = [{
     idkey:  'Pp2aMs38ERY',
     volume: 0
 }, {
+    name:   'Pacman',
+    idkey:  'dScq4P5gn4A',
+    volume: 0
+}, {
+    name:   'Ms Packman',
+    idkey:  'c4n_6NFYvLY',
+    volume: 0
+}, {
+    name:   'Paperboy',
+    idkey:  'l6DEL9GY-VU',
+    volume: 0            
+}, {
+    name:   'Tron',
+    idkey:  'GmPbeHCkAmc&t',
+    volume: 0
+}, {
+    name:   'Time Pilot',
+    idkey:  'cNv0_wY5jp8',
+    volume: 0
+}, {    
     name:   'Popeye',
     idkey:  'hErObuqvlHs',
     volume: 0
@@ -137,7 +157,7 @@ var videos = [{
     volume: 0
 }, {
     name:   'Commando',
-    idkey:  '1qctKI_t5eY',
+    idkey:  'iAcGGEd_y6k',
     volume: 0
 }, {
     name:   'Joust',
