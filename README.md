@@ -10,3 +10,5 @@ https://mrloureed.github.io/sim-arcade/index.html
 
 Feel free to clone, fork, whatever... audio mixing potential?
 https://github.com/mrloureed/sim-arcade
+
+Thank you to http://gamefroot.com/ for the sprite sheet.
