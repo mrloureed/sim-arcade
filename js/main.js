@@ -42,7 +42,7 @@ function gamerMove() {
 }
 
 /* move gamer */
-var gamerX = 0;
+var gamerX = -115;
 var gamerY = 0;
 
 function updateGamerPos() {
@@ -80,8 +80,28 @@ $(document).keydown(function(e) {
         $('#gamer div').css('background-position-y','0');
         gamerY = gamerY + 115;
     }
+    //enter
+    if (e.keyCode == 13) {
+        console.log('gamerX',gamerX,'gamerY',gamerY);
+        checkCollisions();
+    }  
+    //escape
+    if (e.keyCode == 27) {
+        $('.box').removeClass('box-zoom');
+    }        
 
     standingPosition = [gamerX/115,gamerY/115];
+    /*console.log(standingPosition);
+    console.log('#box-'+standingPosition[0]+'-'+standingPosition[1]);
+
+    console.log(gamerX,gamerY);
+    console.log($('#gamer').offset());
+    console.log($('#box-2-1').offset());
+
+    setTimeout(function(){
+        $('#box-'+standingPosition[0]+'-'+standingPosition[1]).hide();
+    }, 250);*/
+
     updateGamerPos();
     updateGameVol();
 });
@@ -93,44 +113,56 @@ tag.src = "https://www.youtube.com/iframe_api";
 var firstScriptTag = document.getElementsByTagName('script')[0];
 firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
-var player = [];
+var videoPlayer = [];
 
 var videos = [{
     name:   'Frogger',
     idkey:  'l9fO-YuWPSk',
+    volume: 0
 }, {
     name:   'Donkey Kong',
     idkey:  'Pp2aMs38ERY',
+    volume: 0
 }, {
     name:   'Popeye',
     idkey:  'hErObuqvlHs',
+    volume: 0
 }, {
     name:   'Centipede',
     idkey:  'V7XEmf02zEM',
+    volume: 0
 }, {
     name:   'Galaga',
     idkey:  'CbPJhLpunXw',
+    volume: 0
 }, {
     name:   'Commando',
     idkey:  '1qctKI_t5eY',
+    volume: 0
 }, {
     name:   'Joust',
     idkey:  'BWoiLNri0OM',
+    volume: 0
 }, {
     name:   'Tempest',
     idkey:  'G2Sv28sYUZc',
+    volume: 0
 }, {
     name:   'Qbert',
     idkey:  'karPYs22ACc',
+    volume: 0
 }, {
     name:   'Zaxxon',
     idkey:  'ul2vX8-dmTA',
+    volume: 0
 }, {
     name:   'Spy Hunter',
     idkey:  'h34MviiKXXc',
+    volume: 0
 }, {
     name:   'Jungle Hunt',
-    idkey:  'DlKi0Is0nGQ'                                  
+    idkey:  'DlKi0Is0nGQ',
+    volume: 0                               
 }];
 
 /* shuffle function */
@@ -167,11 +199,11 @@ function farthestDistance() {
 }
 
 
-/* calculate game distances away from player */
+/* calculate game distances away from gamer */
 var distanceAway;
 var multiplier;
 var percentage;
-function calculateDistance(x,y) {
+function calculateDistance(x,y,i) {
     var a = standingPosition[0] - x;
     var b = standingPosition[1] - y;
     distanceAway = Math.sqrt( a*a + b*b );
@@ -179,7 +211,8 @@ function calculateDistance(x,y) {
     //console.log(standingPosition[0],standingPosition[1],distanceAway,x,y);
     percentage = 100 / distanceAway;
     multiplier = farthestDistance * distanceAway;
-    volume = 100 - multiplier;
+    volume = (100 - multiplier) - 66;
+    videos[i].volume = volume;
     //console.log('volume',volume);
     return volume;
 }
@@ -188,16 +221,32 @@ function updateGameVol() {
     trackIds.forEach(function(event, i){
         var x = $('#'+trackIds[i]).data('x');
         var y = $('#'+trackIds[i]).data('y');
-        calculateDistance(x,y);
-        player[i].setVolume(volume);
+        calculateDistance(x,y,i);
+        videoPlayer[i].setVolume(volume);
     }); 
+}
+
+function checkCollisions() {
+    trackIds.forEach(function(event, i){
+        var currentId = '#'+trackIds[i];
+        var currentX = $(currentId).attr('data-x');
+        var currentY = $(currentId).attr('data-y');
+        // Check if gamer position is above a video
+        if(currentX == standingPosition[0] && currentY == standingPosition[1]) {
+            console.log('match',currentId);
+            console.log('volume',volume);
+            videoPlayer[i].setVolume(100);
+            //videoPlayer[i].setSize(width=1200, height=850);
+            $(currentId).addClass('box-zoom');
+        }
+    });
 }
 
 /* youtube render videos */
 function onYouTubeIframeAPIReady() {
-    console.log(trackIds[trackIds.length-1]);
+    //console.log(trackIds[trackIds.length-1]);
     trackIds.forEach(function(event, i){
-        player[i] = new YT.Player(event, {
+        videoPlayer[i] = new YT.Player(event, {
             height: '115',
             width: '115',
             videoId: videos[i].idkey,
@@ -208,13 +257,12 @@ function onYouTubeIframeAPIReady() {
         });
     });
     farthestDistance();
-    updateGameVol();
 }    
 
 // The API will call this function when the video player is ready.
 function onPlayerReady(event) {
-    event.target.setVolume(0);
     event.target.playVideo();
+    event.target.setVolume(0);
 }
 
 // loop videos
