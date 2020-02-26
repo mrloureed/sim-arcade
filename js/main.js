@@ -106,6 +106,12 @@ $(document).keydown(function(e) {
     updateGameVol();
 });
 
+$(function(){
+    cheet('↑ ↑ ↓ ↓ ← → ← → b a', function () {
+        alert('Pro gamer status confirmed!');
+    });
+});
+
 /*youtube*/
 var tag = document.createElement('script');
 
@@ -182,7 +188,7 @@ var videos = [{
 }, {
     name:   'Jungle Hunt',
     idkey:  'DlKi0Is0nGQ',
-    volume: 0                               
+    volume: 0
 }];
 
 /* shuffle function */
@@ -277,7 +283,7 @@ function onYouTubeIframeAPIReady() {
         });
     });
     farthestDistance();
-}    
+}
 
 // The API will call this function when the video player is ready.
 function onPlayerReady(event) {
@@ -288,6 +294,6 @@ function onPlayerReady(event) {
 // loop videos
 function onPlayerStateChange(event){
     if (event.data === YT.PlayerState.ENDED) {
-        event.target.playVideo(); 
+        event.target.playVideo();
     }
 }
